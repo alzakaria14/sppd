@@ -1,0 +1,10 @@
+{
+    "name": "sppd/diskominfo",
+    "description": "diskominfo sppd",
+    "type": "library",
+    "require": {
+        "ramsey/uuid": "^4.7"
+    },
+    "license": "MIT",
+    "minimum-stability": "stable"
+}
