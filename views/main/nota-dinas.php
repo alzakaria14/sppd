@@ -99,6 +99,8 @@
                                             if ($_COOKIE['roles'] === 'admin' && $data['is_verify'] === '0') {
                                             ?>
                                                 <button class="btn btn-sm btn-warning" type="button" onclick="verifikasiNotaDinas('<?= $data['id_notadinas'] ?>')">Verifikasi</button>
+                                            <?php } else if ($data['is_verify'] === '1') { ?>
+                                                <button type="button" class="btn btn-primary btn-sm">Cetak</button>
                                             <?php } ?>
                                         </td>
                                     </tr>
