@@ -1,9 +1,9 @@
 <div class="pagetitle">
-    <h1>Surat Perintah Perjalanan Dinas</h1>
+    <h1>Surat Perintah Tugas</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item active">Surat Perintah Perjalanan Dinas</li>
+            <li class="breadcrumb-item active">Surat Perintah Tugas</li>
         </ol>
     </nav>
 </div><!-- End Page Title -->
@@ -12,9 +12,9 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Tabel Data Surat Perintah Perjalanan Dinas</h5>
+                    <h5 class="card-title">Tabel Data Surat Perintah Tugas</h5>
                     <div class="text-center">
-                        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#tambahSuratPerjalananDinas">Ajukan SPPD</button>
+                        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#tambahSuratPeritahTugas">Ajukan Surat Perintah Tugas</button>
                     </div>
 
                     <!-- Table with hoverable rows -->
@@ -44,11 +44,11 @@
                                 $no = 1;
                                 $query = mysqli_query(
                                     $connection,
-                                    "SELECT id_sppd, id_user, nama, nip, no_surat, tujuan, perihal, dasar_surat, maksud_tujuan, tanggal_berangkat, tanggal_kembali, tb_sppd.is_verify FROM tb_sppd INNER JOIN tb_user USING (id_user) ORDER BY tb_sppd.created_at DESC"
+                                    "SELECT id_spt, id_user, nama, nip, no_surat, tujuan, perihal, dasar_surat, maksud_tujuan, tanggal_berangkat, tanggal_kembali, tb_spt.is_verify FROM tb_spt INNER JOIN tb_user USING (id_user) ORDER BY tb_spt.created_at DESC"
                                 );
                                 while ($data = mysqli_fetch_assoc($query)) {
                                     $data_modal[] = array(
-                                        'id_sppd' => $data['id_sppd'],
+                                        'id_spt' => $data['id_spt'],
                                         'id_user' => $data['id_user'],
                                         'nama' => $data['nama'],
                                         'nip' => $data['nip'],
@@ -92,13 +92,13 @@
                                             ?>
                                         </td>
                                         <td>
-                                            <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#editSuratPerjalananDinas<?= $data['id_sppd'] ?>">Edit</button>
-                                            <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#hapusSuratPerjalananDinas<?= $data['id_sppd'] ?>">Hapus</button>
+                                            <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#editSuratPerintahTugas<?= $data['id_spt'] ?>">Edit</button>
+                                            <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#hapusSuratPerintahTugas<?= $data['id_spt'] ?>">Hapus</button>
                                             <?php
 
                                             if ($_COOKIE['roles'] === 'admin' && $data['is_verify'] === '0') {
                                             ?>
-                                                <button class="btn btn-sm btn-warning" type="button" onclick="verifikasiSuratPerjalananDinas('<?= $data['id_sppd'] ?>')">Verifikasi</button>
+                                                <button class="btn btn-sm btn-warning" type="button" onclick="verifikasiSuratPerintahTugas('<?= $data['id_spt'] ?>')">Verifikasi</button>
                                             <?php } else if ($data['is_verify'] === '1') { ?>
                                                 <button type="button" class="btn btn-primary btn-sm">Cetak</button>
                                             <?php } ?>
@@ -124,35 +124,35 @@ foreach ($data_modal as $data) {
 ?>
 
     <!-- Modal Hapus -->
-    <div class="modal fade" id="hapusSuratPerjalananDinas<?= $data['id_sppd'] ?>" tabindex="-1" aria-labelledby="hapusSuratPerjalananDinas<?= $data['id_sppd'] ?>Label" aria-hidden="true">
+    <div class="modal fade" id="hapusSuratPerintahTugas<?= $data['id_spt'] ?>" tabindex="-1" aria-labelledby="hapusSuratPerintahTugas<?= $data['id_spt'] ?>Label" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="hapusSuratPerjalananDinas<?= $data['id_sppd'] ?>Label">Konfirmasi Hapus Nota Dinas</h1>
+                    <h1 class="modal-title fs-5" id="hapusSuratPerintahTugas<?= $data['id_spt'] ?>Label">Konfirmasi Hapus Surat Perintah Tugas</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Yakin menghapus Nota Dinas <b><?= $data['no_surat'] ?></b>?<br>data yang sudah dihapus tidak bisa dikembalikan lagi
+                    Yakin menghapus Surat Perintah Tugas <b><?= $data['no_surat'] ?></b>?<br>data yang sudah dihapus tidak bisa dikembalikan lagi
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="hapusSuratPerjalananDinas('<?= $data['id_sppd'] ?>')">Hapus</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="hapusSuratPerintahTugas('<?= $data['id_spt'] ?>')">Hapus</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Modal Edit -->
-    <div class="modal fade" id="editSuratPerjalananDinas<?= $data['id_sppd'] ?>" tabindex="-1" aria-labelledby="editSuratPerjalananDinas<?= $data['id_sppd'] ?>Label" aria-hidden="true">
+    <div class="modal fade" id="editSuratPerintahTugas<?= $data['id_spt'] ?>" tabindex="-1" aria-labelledby="editSuratPerintahTugas<?= $data['id_spt'] ?>Label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="editSuratPerjalananDinas<?= $data['id_sppd'] ?>Label">Formulir Edit SPPD</h1>
+                    <h1 class="modal-title fs-5" id="editSuratPerintahTugas<?= $data['id_spt'] ?>Label">Formulir Edit Surat Perintah Tugas</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" id="editSuratPerjalananDinasForm<?= $data['id_sppd'] ?>" class="row g-3">
-                        <input type="hidden" name="id_sppd" value="<?= $data['id_sppd'] ?>">
+                    <form action="" id="editSuratPerintahTugasForm<?= $data['id_spt'] ?>" class="row g-3">
+                        <input type="hidden" name="id_spt" value="<?= $data['id_spt'] ?>">
                         <div class="col-12">
                             <label for="no_surat" class="form-label">No Surat</label>
                             <input type="no_surat" class="form-control" id="no_surat" name="no_surat" value="<?= $data['no_surat'] ?>">
@@ -197,7 +197,7 @@ foreach ($data_modal as $data) {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-primary" onclick="editSuratPerjalananDinas('<?= $data['id_sppd'] ?>')" data-bs-dismiss="modal">Simpan</button>
+                    <button type="button" class="btn btn-primary" onclick="editSuratPerintahTugas('<?= $data['id_spt'] ?>')" data-bs-dismiss="modal">Simpan</button>
                 </div>
             </div>
         </div>
@@ -205,15 +205,15 @@ foreach ($data_modal as $data) {
 
 <?php } ?>
 <!-- Modal tambah pegawai -->
-<div class="modal fade" id="tambahSuratPerjalananDinas" tabindex="-1" aria-labelledby="tambahSuratPerjalananDinasLabel" aria-hidden="true">
+<div class="modal fade" id="tambahSuratPeritahTugas" tabindex="-1" aria-labelledby="tambahSuratPeritahTugasLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="tambahSuratPerjalananDinasLabel">Formulir Tambah SPPD</h1>
+                <h1 class="modal-title fs-5" id="tambahSuratPeritahTugasLabel">Formulir Tambah Surat Perintah Tugas</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="" id="tambahSuratPerjalananDinasForm" class="row g-3">
+                <form action="" id="tambahSuratPerintahTugasForm" class="row g-3">
                     <div class="col-12">
                         <label for="no_surat" class="form-label">No Surat</label>
                         <input type="no_surat" class="form-control" id="no_surat" name="no_surat">
@@ -267,7 +267,7 @@ foreach ($data_modal as $data) {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <button type="button" class="btn btn-primary" onclick="tambahSuratPerjalananDinas()" data-bs-dismiss="modal">Tambah</button>
+                <button type="button" class="btn btn-primary" onclick="tambahSuratPerintahTugas()" data-bs-dismiss="modal">Tambah</button>
             </div>
         </div>
     </div>

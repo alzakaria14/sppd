@@ -227,6 +227,7 @@ function unggahDasarSurat() {
     });
 }
 
+
 function tambahNotaDinas() {
     let data = $('#tambahNotaDinasForm').serialize();
     let url = api('controller/tambah-nota-dinas');
@@ -273,6 +274,140 @@ function editNotaDinas(params) {
             console.log(response);
             setTimeout(() => {
                 nav('nota-dinas');
+            }, 200);
+        }
+    });
+}
+
+function tambahSuratPerjalananDinas() {
+    let data = $('#tambahSuratPerjalananDinasForm').serialize();
+    let url = api('controller/tambah-surat-perjalanan-dinas');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        dataType: "text",
+        success: function (response) {
+            console.log(response);
+            setTimeout(() => {
+                nav('surat-perjalanan-dinas');
+            }, 200);
+        }
+    });
+}
+
+function verifikasiSuratPerjalananDinas(params) {
+    let url = api('/controller/verifikasi-surat-perjalanan-dinas');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            id_sppd: params
+        },
+        success: function (response) {
+            setTimeout(() => {
+                nav('surat-perjalanan-dinas');
+            }, 200);
+        }
+    });
+}
+
+function hapusSuratPerjalananDinas(params) {
+    let url = api('controller/hapus-surat-perjalanan-dinas');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            id_sppd: params
+        },
+        dataType: "text",
+        success: function (response) {
+            console.log(response);
+            setTimeout(() => {
+                nav('surat-perjalanan-dinas');
+            }, 200);
+        }
+    });
+}
+
+function editSuratPerjalananDinas(params) {
+    let data = $('#editSuratPerjalananDinasForm' + params).serialize();
+    let url = api('controller/edit-surat-perjalanan-dinas');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        success: function (response) {
+            console.log(response);
+            setTimeout(() => {
+                nav('surat-perjalanan-dinas');
+            }, 200);
+        }
+    });
+}
+
+function tambahSuratPerintahTugas() {
+    let data = $('#tambahSuratPerintahTugasForm').serialize();
+    let url = api('controller/tambah-surat-perintah-tugas');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        dataType: "text",
+        success: function (response) {
+            console.log(response);
+            setTimeout(() => {
+                nav('surat-perintah-tugas');
+            }, 200);
+        }
+    });
+}
+
+function verifikasiSuratPerintahTugas(params) {
+    let url = api('/controller/verifikasi-surat-perintah-tugas');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            id_spt: params
+        },
+        success: function (response) {
+            setTimeout(() => {
+                nav('surat-perintah-tugas');
+            }, 200);
+        }
+    });
+}
+
+function hapusSuratPerintahTugas(params) {
+    let url = api('controller/hapus-surat-perintah-tugas');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            id_spt: params
+        },
+        dataType: "text",
+        success: function (response) {
+            console.log(response);
+            setTimeout(() => {
+                nav('surat-perintah-tugas');
+            }, 200);
+        }
+    });
+}
+
+function editSuratPerintahTugas(params) {
+    let data = $('#editSuratPerintahTugasForm' + params).serialize();
+    let url = api('controller/edit-surat-perintah-tugas');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        success: function (response) {
+            console.log(response);
+            setTimeout(() => {
+                nav('surat-perintah-tugas');
             }, 200);
         }
     });

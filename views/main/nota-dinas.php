@@ -147,7 +147,7 @@ foreach ($data_modal as $data) {
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="editNotaDinas<?= $data['id_notadinas'] ?>Label">Formulir Tambah Data Pegawai</h1>
+                    <h1 class="modal-title fs-5" id="editNotaDinas<?= $data['id_notadinas'] ?>Label">Formulir Edit Nota Dinas</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -180,15 +180,6 @@ foreach ($data_modal as $data) {
                         <div class="col-12">
                             <label for="perihal" class="form-label">Perihal</label>
                             <input type="text" name="perihal" id="perihal" class="form-control" value="<?= $data['perihal'] ?>">
-                        </div>
-                        <div class="col-12">
-                            <label for="dasar_surat" class="form-label">Dasar Surat (Opsional)</label>
-                            <div class="input-group">
-                                <input type="file" name="dasar_surat" id="dasar_surat" class="form-control">
-                                <button class="btn btn-primary" type="button" id="btn-unggah" onclick="unggahDasarSurat()">Unggah</button>
-                            </div>
-                            <div id="list-dasar-surat">
-                            </div>
                         </div>
                         <div class="col-12">
                             <label for="maksud_tujuan" class="form-label">Maksud Tujuan</label>
