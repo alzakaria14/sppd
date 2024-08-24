@@ -412,3 +412,69 @@ function editSuratPerintahTugas(params) {
         }
     });
 }
+
+function totalAnggaran() {
+    let uang_harian = parseFloat($('#uang_harian').val());
+    let transportasi = parseFloat($('#transportasi').val());
+    let penginapan = parseFloat($('#penginapan').val());
+    let total = uang_harian + transportasi + penginapan;
+    $('#total').val(total);
+}
+
+function totalAnggaranEdit(params) {
+    let uang_harian = parseFloat($('#uang_harian' + params).val());
+    let transportasi = parseFloat($('#transportasi' + params).val());
+    let penginapan = parseFloat($('#penginapan' + params).val());
+    let total = uang_harian + transportasi + penginapan;
+    $('#total' + params).val(total);
+}
+
+function tambahAnggaran() {
+    let data = $('#tambahAnggaranForm').serialize();
+    let url = api('controller/tambah-anggaran');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        dataType: "text",
+        success: function (response) {
+            setTimeout(() => {
+                nav('anggaran');
+            }, 200);
+        }
+    });
+}
+
+function hapusAnggaran(params) {
+    let url = api('controller/hapus-anggaran');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            id_anggaran: params
+        },
+        dataType: "text",
+        success: function (response) {
+            console.log(response);
+            setTimeout(() => {
+                nav('anggaran');
+            }, 200);
+        }
+    });
+}
+
+function editAnggaran(params) {
+    let data = $('#editAnggaranForm' + params).serialize();
+    let url = api('controller/edit-anggaran');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        success: function (response) {
+            console.log(response);
+            setTimeout(() => {
+                nav('anggaran');
+            }, 200);
+        }
+    });
+}
