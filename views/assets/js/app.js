@@ -11,6 +11,16 @@ function cookieValue(nameCookie) {
     return null;
 }
 
+function generateUUID() {
+    // Generate random bytes
+    const randomBytes = () => {
+        return (Math.random() * 0x10000 | 0).toString(16).padStart(4, '0');
+    };
+
+    // Generate UUID with the format xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx
+    return `${randomBytes()}${randomBytes()}-${randomBytes()}-4${randomBytes().substring(0, 3)}-${(Math.random() * 0x10 | 0x8).toString(16)}${randomBytes().substring(0, 3)}-${randomBytes()}${randomBytes()}${randomBytes()}`;
+}
+
 function getDataUser() {
     let id_login = cookieValue('id_login');
     let token = cookieValue('token');
@@ -606,6 +616,73 @@ function editKwitansi(params) {
             console.log(response);
             setTimeout(() => {
                 nav('kwitansi');
+            }, 200);
+        }
+    });
+}
+
+function tambahListPengeluaran() {
+    let uuid = generateUUID();
+    let list = '<div class="row g-3" id="' + uuid + '"> <div class="col-6"> <label for="keterangan" class="form-label">Keterangan</label> <input type="text" name="keterangan[]" id="keterangan" class="form-control"> </div> <div class="col-6"> <label for="jumlah" class="form-label">Jumlah</label> <div class="input-group"> <input type="text" name="jumlah[]" id="jumlah" class="form-control"> <button type="button" class="btn btn-danger" onclick="hapusListPengeluaran(' + "'" + '' + uuid + "'" + ')"> <i class="bi bi-trash"></i> </button> </div> </div> </div>';
+    $('#list-pengeluaran').append(list);
+}
+
+function tambahListPengeluaranEdit(params) {
+    let uuid = generateUUID();
+    let list = '<div class="row g-3" id="' + uuid + '"> <div class="col-6"> <label for="keterangan" class="form-label">Keterangan</label> <input type="text" name="keterangan[]" id="keterangan" class="form-control"> </div> <div class="col-6"> <label for="jumlah" class="form-label">Jumlah</label> <div class="input-group"> <input type="text" name="jumlah[]" id="jumlah" class="form-control"> <button type="button" class="btn btn-danger" onclick="hapusListPengeluaran(' + "'" + '' + uuid + "'" + ')"> <i class="bi bi-trash"></i> </button> </div> </div> </div>';
+    $('#list-pengeluaran-' + params).append(list);
+}
+
+function hapusListPengeluaran(params) {
+    $('#' + params).remove();
+}
+
+function tambahPengeluaran() {
+    let data = $('#tambahPengeluaranForm').serialize();
+    let url = api('controller/tambah-pengeluaran');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        dataType: "text",
+        success: function (response) {
+            console.log(response);
+            setTimeout(() => {
+                nav('pengeluaran-rill');
+            }, 200);
+        }
+    });
+}
+
+function hapusPengeluaran(params) {
+    let url = api('controller/hapus-pengeluaran');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            id_pengeluaran: params
+        },
+        dataType: "text",
+        success: function (response) {
+            console.log(response);
+            setTimeout(() => {
+                nav('pengeluaran-rill');
+            }, 200);
+        }
+    });
+}
+
+function editPengeluaran(params) {
+    let data = $('#editPengeluaranForm' + params).serialize();
+    let url = api('controller/edit-pengeluaran');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        success: function (response) {
+            console.log(response);
+            setTimeout(() => {
+                nav('pengeluaran-rill');
             }, 200);
         }
     });
