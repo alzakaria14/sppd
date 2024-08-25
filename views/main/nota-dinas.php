@@ -100,7 +100,7 @@
                                             ?>
                                                 <button class="btn btn-sm btn-warning" type="button" onclick="verifikasiNotaDinas('<?= $data['id_notadinas'] ?>')">Verifikasi</button>
                                             <?php } else if ($data['is_verify'] === '1') { ?>
-                                                <button type="button" class="btn btn-primary btn-sm">Cetak</button>
+                                                <a target="_blank" href="../api/controller/cetak/nota-dinas.php?id=<?= $data['id_notadinas'] ?>" class="btn btn-primary btn-sm">Cetak</a>
                                             <?php } ?>
                                         </td>
                                     </tr>
