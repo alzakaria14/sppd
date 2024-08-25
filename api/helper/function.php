@@ -67,3 +67,17 @@ function terbilang($angka)
 
     return trim($terbilang);
 }
+
+function calculateDateDifference($startDate, $endDate)
+{
+
+    // Membuat objek DateTime dari tanggal yang diberikan
+    $start = new DateTime($startDate);
+    $end = new DateTime($endDate);
+
+    // Menghitung selisih antara dua tanggal
+    $difference = $start->diff($end);
+
+    // Mengembalikan selisih hari dengan tanda positif atau negatif
+    return $difference->invert ? -$difference->days : $difference->days;
+}

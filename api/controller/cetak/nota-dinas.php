@@ -106,7 +106,7 @@ class PDF extends FPDF
         $this->SetFont('Times', 'B', 12);
         $this->Cell(60, 6, 'D. Lama Keberangkatan            :', 0, 0, 'L');
         $this->SetFont('Times', '', 12);
-        $this->Cell(120, 6, '3 hari', 0, 1, 'L');
+        $this->Cell(120, 6, calculateDateDifference($data['tanggal_berangkat'], $data['tanggal_kembali']) . ' Hari', 0, 1, 'L');
         $this->Cell(60, 6, '', 0, 0, 'L');
         $this->Cell(40, 6, 'Tanggal Berangkat', 0, 0, 'L');
         $this->Cell(5, 6, ':', 0, 0, 'C');
