@@ -478,3 +478,135 @@ function editAnggaran(params) {
         }
     });
 }
+
+function terbilangShow() {
+    let angka = parseInt($('#jumlah').val());
+    const satuan = ["", "Satu", "Dua", "Tiga", "Empat", "Lima", "Enam", "Tujuh", "Delapan", "Sembilan"];
+    const belasan = ["", "Sepuluh", "Sebelas", "Dua Belas", "Tiga Belas", "Empat Belas", "Lima Belas", "Enam Belas", "Tujuh Belas", "Delapan Belas", "Sembilan Belas"];
+    const puluhan = ["", "Sepuluh", "Dua Puluh", "Tiga Puluh", "Empat Puluh", "Lima Puluh", "Enam Puluh", "Tujuh Puluh", "Delapan Puluh", "Sembilan Puluh"];
+    const ribuan = ["", "Ribu", "Juta", "Miliar", "Triliun"];
+
+    if (angka === 0) return "Nol";
+
+    let terbilang = "";
+    let idx = 0;
+
+    while (angka > 0) {
+        let bagian = angka % 1000;
+        if (bagian > 0) {
+            let strBagian = "";
+            let ratusan = Math.floor(bagian / 100);
+            let sisa = bagian % 100;
+
+            if (ratusan > 0) {
+                strBagian += satuan[ratusan] + " Ratus ";
+            }
+
+            if (sisa < 20) {
+                strBagian += (sisa < 10 ? satuan[sisa] : belasan[sisa - 10]);
+            } else {
+                let puluh = Math.floor(sisa / 10);
+                let unit = sisa % 10;
+                strBagian += puluhan[puluh] + (unit > 0 ? " " + satuan[unit] : "");
+            }
+
+            terbilang = strBagian + (ribuan[idx] ? " " + ribuan[idx] : "") + " " + terbilang;
+        }
+
+        angka = Math.floor(angka / 1000);
+        idx++;
+    }
+
+    $('#terbilang').val(terbilang.trim());
+}
+
+function terbilangShowEdit(params) {
+    let angka = parseInt($('#jumlah' + params).val());
+    const satuan = ["", "Satu", "Dua", "Tiga", "Empat", "Lima", "Enam", "Tujuh", "Delapan", "Sembilan"];
+    const belasan = ["", "Sepuluh", "Sebelas", "Dua Belas", "Tiga Belas", "Empat Belas", "Lima Belas", "Enam Belas", "Tujuh Belas", "Delapan Belas", "Sembilan Belas"];
+    const puluhan = ["", "Sepuluh", "Dua Puluh", "Tiga Puluh", "Empat Puluh", "Lima Puluh", "Enam Puluh", "Tujuh Puluh", "Delapan Puluh", "Sembilan Puluh"];
+    const ribuan = ["", "Ribu", "Juta", "Miliar", "Triliun"];
+
+    if (angka === 0) return "Nol";
+
+    let terbilang = "";
+    let idx = 0;
+
+    while (angka > 0) {
+        let bagian = angka % 1000;
+        if (bagian > 0) {
+            let strBagian = "";
+            let ratusan = Math.floor(bagian / 100);
+            let sisa = bagian % 100;
+
+            if (ratusan > 0) {
+                strBagian += satuan[ratusan] + " Ratus ";
+            }
+
+            if (sisa < 20) {
+                strBagian += (sisa < 10 ? satuan[sisa] : belasan[sisa - 10]);
+            } else {
+                let puluh = Math.floor(sisa / 10);
+                let unit = sisa % 10;
+                strBagian += puluhan[puluh] + (unit > 0 ? " " + satuan[unit] : "");
+            }
+
+            terbilang = strBagian + (ribuan[idx] ? " " + ribuan[idx] : "") + " " + terbilang;
+        }
+
+        angka = Math.floor(angka / 1000);
+        idx++;
+    }
+
+    $('#terbilang' + params).val(terbilang.trim());
+}
+
+function tambahKwitansi() {
+    let data = $('#tambahKwitansiForm').serialize();
+    let url = api('controller/tambah-kwitansi');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        dataType: "text",
+        success: function (response) {
+            setTimeout(() => {
+                nav('kwitansi');
+            }, 200);
+        }
+    });
+}
+
+function hapusKwitansi(params) {
+    let url = api('controller/hapus-kwitansi');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            id_kwitansi: params
+        },
+        dataType: "text",
+        success: function (response) {
+            console.log(response);
+            setTimeout(() => {
+                nav('kwitansi');
+            }, 200);
+        }
+    });
+}
+
+function editKwitansi(params) {
+    let data = $('#editKwitansiForm' + params).serialize();
+    let url = api('controller/edit-kwitansi');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        success: function (response) {
+            console.log(response);
+            setTimeout(() => {
+                nav('kwitansi');
+            }, 200);
+        }
+    });
+}
