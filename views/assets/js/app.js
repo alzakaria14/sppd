@@ -680,9 +680,76 @@ function editPengeluaran(params) {
         url: url,
         data: data,
         success: function (response) {
-            console.log(response);
+            // console.log(response);
             setTimeout(() => {
                 nav('pengeluaran-rill');
+            }, 200);
+        }
+    });
+}
+
+function tambahListKegiatan() {
+    let uuid = generateUUID();
+    let list = '<div class="row g-3" id="' + uuid + '"> <div class="col-12"> <label for="kegiatan" class="form-label">Kegiatan</label> <div class="input-group"> <input type="text" name="kegiatan[]" id="kegiatan" class="form-control"> <button type="button" class="btn btn-danger" onclick="hapusListKegiatan(' + "'" + '' + uuid + "'" + ')"> <i class="bi bi-trash"></i> </button> </div> </div> <div class="col-6"> <label for="tanggal" class="form-label">Tanggal</label> <input type="date" name="tanggal[]" id="tanggal" class="form-control"> </div> <div class="col-6"> <label for="tempat" class="form-label">Tempat</label> <input type="text" name="tempat[]" id="tempat" class="form-control"> </div><hr> </div> ';
+    $('#list-kegiatan').append(list);
+}
+
+function hapusListKegiatan(params) {
+    $('#' + params).remove();
+}
+
+function tambahKegiatan() {
+    let data = $('#tambahKegiatanForm').serialize();
+    let url = api('controller/tambah-kegiatan');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        dataType: "text",
+        success: function (response) {
+            console.log(response);
+            setTimeout(() => {
+                nav('kegiatan');
+            }, 200);
+        }
+    });
+}
+
+function hapusKegiatan(params) {
+    let url = api('controller/hapus-kegiatan');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            id_kegiatan: params
+        },
+        dataType: "text",
+        success: function (response) {
+            console.log(response);
+            setTimeout(() => {
+                nav('kegiatan');
+            }, 200);
+        }
+    });
+}
+
+function tambahListKegiatanEdit(params) {
+    let uuid = generateUUID();
+    let list = '<div class="row g-3" id="' + uuid + '"> <div class="col-12"> <label for="kegiatan" class="form-label">Kegiatan</label> <div class="input-group"> <input type="text" name="kegiatan[]" id="kegiatan" class="form-control"> <button type="button" class="btn btn-danger" onclick="hapusListKegiatan(' + "'" + '' + uuid + "'" + ')"> <i class="bi bi-trash"></i> </button> </div> </div> <div class="col-6"> <label for="tanggal" class="form-label">Tanggal</label> <input type="date" name="tanggal[]" id="tanggal" class="form-control"> </div> <div class="col-6"> <label for="tempat" class="form-label">Tempat</label> <input type="text" name="tempat[]" id="tempat" class="form-control"> </div><hr> </div> ';
+    $('#list-kegiatan-' + params).append(list);
+}
+
+function editKegiatan(params) {
+    let data = $('#editKegiatanForm' + params).serialize();
+    let url = api('controller/edit-kegiatan');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        success: function (response) {
+            // console.log(response);
+            setTimeout(() => {
+                nav('kegiatan');
             }, 200);
         }
     });
