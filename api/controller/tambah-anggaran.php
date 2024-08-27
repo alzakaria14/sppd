@@ -11,8 +11,8 @@ $id_sppd = $_POST['id_sppd'];
 $uang_harian = $_POST['uang_harian'];
 $transportasi = $_POST['transportasi'];
 $penginapan = $_POST['penginapan'];
-$created_at = $datetime;
-$updated_at = $datetime;
+$created_at = $datenow;
+$updated_at = $datenow;
 
 mysqli_query(
     $connection,
