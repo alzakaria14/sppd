@@ -754,3 +754,97 @@ function editKegiatan(params) {
         }
     });
 }
+
+function uploadBukti(params) {
+    let spinner = '<div class="spinner-border" role="status"> <span class="visually-hidden">Loading...</span> </div>';
+    $('#btn-unggah').html(spinner);
+    let data = new FormData();
+    data.append('bukti', $('#bukti-' + params)[0].files[0]);
+    let url = api('controller/upload-bukti');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function (response) {
+            // console.log(response);
+            if (response.status === true) {
+                $('#' + params).html('<input type="hidden" name="bukti[]"  value="' + response.filename + '"> <ul> <li>' + response.originalFilename + '</li> </ul>')
+                $('#btn-unggah').html('Unggah');
+            } else if (response.status === false) {
+                $('#list-bukti').html('<span class="text-danger">Hanya file jpg, png, dan pdf yang diizinkan</span>');
+                $('#btn-unggah').html('Unggah');
+                setTimeout(() => {
+                    $('#list-bukti').html('');
+                }, 5000);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('Terjadi kesalahan: ' + error);
+        }
+    });
+}
+
+function tambahListBukti() {
+    let uuid = generateUUID();
+    let uuidContent = generateUUID();
+    let list = '<div class="row g-3" id="' + uuid + '"> <div class="col-12"> <label for="bukti" class="form-label">Bukti/Nota</label> <div class="input-group"> <input type="file" name="" id="bukti-' + uuidContent + '" class="form-control"> <button type="button" class="btn btn-primary" id="btn-unggah-' + uuidContent + '" onclick="uploadBukti(' + "'" + '' + uuidContent + "'" + ')">Unggah</button> <button type="button" class="btn btn-danger" onclick="hapusBukti(' + "'" + '' + uuid + "'" + ')"> <i class="bi bi-trash"></i> </button> </div> <div id="' + uuidContent + '"> </div> </div></div>';
+    $('#list-bukti').append(list);
+}
+
+function hapusBukti(params) {
+    $('#' + params).remove();
+}
+
+function tambahLaporan() {
+    let data = $('#tambahLaporanForm').serialize();
+    let url = api('controller/tambah-laporan');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        dataType: "text",
+        success: function (response) {
+            console.log(response);
+            setTimeout(() => {
+                nav('lpj');
+            }, 200);
+        }
+    });
+}
+
+function hapusLaporan(params) {
+    let url = api('controller/hapus-laporan');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            id_lpj: params
+        },
+        dataType: "text",
+        success: function (response) {
+            console.log(response);
+            setTimeout(() => {
+                nav('lpj');
+            }, 200);
+        }
+    });
+}
+
+function editLaporan(params) {
+    let data = $('#editLaporanForm' + params).serialize();
+    let url = api('controller/edit-laporan');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        success: function (response) {
+            console.log(response);
+            setTimeout(() => {
+                nav('lpj');
+            }, 200);
+        }
+    });
+}
