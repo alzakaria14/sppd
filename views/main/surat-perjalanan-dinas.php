@@ -105,7 +105,7 @@
                                             ?>
                                                 <button class="btn btn-sm btn-warning" type="button" onclick="verifikasiSuratPerjalananDinas('<?= $data['id_sppd'] ?>')">Verifikasi</button>
                                             <?php } else if ($data['is_verify'] === '1') { ?>
-                                                <button type="button" class="btn btn-primary btn-sm">Cetak</button>
+                                                <a target="_blank" href="../api/controller/cetak/sppd.php?id=<?= $data['id_sppd'] ?>" class="btn btn-primary btn-sm">Cetak</a>
                                             <?php } ?>
                                         </td>
                                     </tr>
