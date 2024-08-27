@@ -105,7 +105,7 @@
                                             ?>
                                                 <button class="btn btn-sm btn-warning" type="button" onclick="verifikasiSuratPerintahTugas('<?= $data['id_spt'] ?>')">Verifikasi</button>
                                             <?php } else if ($data['is_verify'] === '1') { ?>
-                                                <button type="button" class="btn btn-primary btn-sm">Cetak</button>
+                                                <a target="_blank" href="../api/controller/cetak/spt.php?id=<?= $data['id_spt'] ?>" class="btn btn-primary btn-sm">Cetak</a>
                                             <?php } ?>
                                         </td>
                                     </tr>
