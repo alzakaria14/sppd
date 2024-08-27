@@ -92,8 +92,13 @@
                                             ?>
                                         </td>
                                         <td>
-                                            <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#editSuratPerjalananDinas<?= $data['id_sppd'] ?>">Edit</button>
-                                            <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#hapusSuratPerjalananDinas<?= $data['id_sppd'] ?>">Hapus</button>
+                                            <?php
+
+                                            if ($_COOKIE['roles'] === 'admin') {
+                                            ?>
+                                                <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#editSuratPerjalananDinas<?= $data['id_sppd'] ?>">Edit</button>
+                                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#hapusSuratPerjalananDinas<?= $data['id_sppd'] ?>">Hapus</button>
+                                            <?php } ?>
                                             <?php
 
                                             if ($_COOKIE['roles'] === 'admin' && $data['is_verify'] === '0') {

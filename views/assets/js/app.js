@@ -50,7 +50,7 @@ function getDataUser() {
 }
 
 $(document).ready(function () {
-    $('#header-js').load('header.html');
+    $('#header-js').load('header.php');
     $('#main').load('main/dashboard.php');
 });
 

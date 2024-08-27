@@ -92,8 +92,13 @@
                                             ?>
                                         </td>
                                         <td>
-                                            <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#editNotaDinas<?= $data['id_notadinas'] ?>">Edit</button>
-                                            <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#hapusNotaDinas<?= $data['id_notadinas'] ?>">Hapus</button>
+                                            <?php
+
+                                            if ($_COOKIE['roles'] === 'admin') {
+                                            ?>
+                                                <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#editNotaDinas<?= $data['id_notadinas'] ?>">Edit</button>
+                                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#hapusNotaDinas<?= $data['id_notadinas'] ?>">Hapus</button>
+                                            <?php } ?>
                                             <?php
 
                                             if ($_COOKIE['roles'] === 'admin' && $data['is_verify'] === '0') {
