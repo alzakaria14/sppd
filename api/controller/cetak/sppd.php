@@ -108,9 +108,12 @@ class PDF extends FPDF
 
         $this->Cell(90, 10, '11. Keterangan Lain-lain', 1, 0, 'L');
         $this->Cell(100, 10, '', 1, 1, 'L');
+        $this->SetFont('Times', '', 10);
         $this->Ln();
         $this->Cell(100, 0, '', 0, 0);
-        $this->Cell(100, 5, 'Kepala Dinas', 0, 1, 'C');
+        $this->Cell(100, 5, 'Kepala Dinas,', 0, 1, 'C');
+        $this->Cell(100, 0, '', 0, 0);
+        $this->Cell(100, 5, idn_date(date('Y-m-d')), 0, 1, 'C');
         $this->Cell(120, 7, '', 0, 1);
         $this->Cell(120, 7, '', 0, 1);
         $this->Cell(120, 7, '', 0, 1);
