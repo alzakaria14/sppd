@@ -134,12 +134,12 @@
             </a>
             <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="components-alerts.html">
+                    <a href="#" onclick="nav('rekap')">
                         <i class="bi bi-circle"></i><span>Cetak Rekap Perjalanan Dinas</span>
                     </a>
                 </li>
                 <li>
-                    <a href="components-accordion.html">
+                    <a href="../api/controller/cetak/pegawai.php" target="_blank">
                         <i class="bi bi-circle"></i><span>Cetak Data Pegawai</span>
                     </a>
                 </li>

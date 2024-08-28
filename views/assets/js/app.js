@@ -848,3 +848,10 @@ function editLaporan(params) {
         }
     });
 }
+
+function cetakRekap() {
+    let startDate = $('#start-date').val();
+    let endDate = $('#end-date').val();
+    let url = '../api/controller/cetak/rekap.php?1=' + startDate + '&2=' + endDate;
+    window.open(url, '_blank');
+}
