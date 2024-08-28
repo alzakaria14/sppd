@@ -65,7 +65,7 @@
                                         <td>
                                             <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#editAnggaran<?= $data['id_anggaran'] ?>">Edit</button>
                                             <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#hapusAnggaran<?= $data['id_anggaran'] ?>">Hapus</button>
-                                            <button type="button" class="btn btn-primary btn-sm">Cetak</button>
+                                            <a target="_blank" href="../api/controller/cetak/anggaran.php?id=<?= $data['id_anggaran'] ?>" class="btn btn-primary btn-sm">Cetak</a>
                                         </td>
                                     </tr>
                                 <?php } ?>
