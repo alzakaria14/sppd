@@ -60,7 +60,7 @@
                                         <td>
                                             <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#editKwitansi<?= $data['id_kwitansi'] ?>">Edit</button>
                                             <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#hapusKwitansi<?= $data['id_kwitansi'] ?>">Hapus</button>
-                                            <button type="button" class="btn btn-primary btn-sm">Cetak</button>
+                                            <a target="_blank" href="../api/controller/cetak/kwitansi.php?id=<?= $data['id_kwitansi'] ?>" class="btn btn-primary btn-sm">Cetak</a>
                                         </td>
                                     </tr>
                                 <?php } ?>
