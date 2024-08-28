@@ -92,7 +92,7 @@
                                         <td>
                                             <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#editKegiatan<?= $data['id_kegiatan'] ?>">Edit</button>
                                             <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#hapusKegiatan<?= $data['id_kegiatan'] ?>">Hapus</button>
-                                            <button type="button" class="btn btn-primary btn-sm">Cetak</button>
+                                            <a href="../api/controller/cetak/kegiatan.php?id=<?= $data['id_kegiatan'] ?>" target="_blank" class="btn btn-primary btn-sm">Cetak</a>
                                         </td>
                                     </tr>
                                 <?php } ?>
