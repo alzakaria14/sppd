@@ -1,3 +1,8 @@
+<?php
+
+require '../../api/config/connection.php';
+require 'access.php';
+?>
 <div class="pagetitle">
     <h1>Surat Perintah Tugas</h1>
     <nav>
@@ -42,10 +47,17 @@
                                 require '../../api/helper/function.php';
                                 $data_modal = [];
                                 $no = 1;
-                                $query = mysqli_query(
-                                    $connection,
-                                    "SELECT id_spt, id_user, nama, nip, no_surat, tujuan, perihal, dasar_surat, maksud_tujuan, tanggal_berangkat, tanggal_kembali, tb_spt.is_verify FROM tb_spt INNER JOIN tb_user USING (id_user) ORDER BY tb_spt.created_at DESC"
-                                );
+                                if ($_COOKIE['roles'] == 'admin') {
+                                    $query = mysqli_query(
+                                        $connection,
+                                        "SELECT id_spt, id_user, nama, nip, no_surat, tujuan, perihal, dasar_surat, maksud_tujuan, tanggal_berangkat, tanggal_kembali, tb_spt.is_verify FROM tb_spt INNER JOIN tb_user USING (id_user) ORDER BY tb_spt.created_at DESC"
+                                    );
+                                } else {
+                                    $query = mysqli_query(
+                                        $connection,
+                                        "SELECT id_spt, id_user, nama, nip, no_surat, tujuan, perihal, dasar_surat, maksud_tujuan, tanggal_berangkat, tanggal_kembali, tb_spt.is_verify FROM tb_spt INNER JOIN tb_user USING (id_user) WHERE id_user = '$id_user' ORDER BY tb_spt.created_at DESC"
+                                    );
+                                }
                                 while ($data = mysqli_fetch_assoc($query)) {
                                     $data_modal[] = array(
                                         'id_spt' => $data['id_spt'],

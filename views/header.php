@@ -124,6 +124,12 @@
                     <span>Data Pegawai</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" onclick="nav('beranda')">
+                    <i class="bi bi-people-fill"></i>
+                    <span>Data Profil</span>
+                </a>
+            </li>
         <?php } ?>
 
 

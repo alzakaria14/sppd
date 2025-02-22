@@ -16,6 +16,41 @@ require '../../api/config/connection.php';
     <div class="row">
         <h5>Selamat Datang</h5>
         <h2 class="name"></h2>
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <?php
+
+                $query = mysqli_query(
+                    $connection,
+                    "SELECT * FROM tb_slider ORDER BY created_at DESC"
+                );
+                $no = 1;
+                while ($data = mysqli_fetch_assoc($query)) {
+                ?>
+                    <div class="carousel-item <?= $no == 1 ? 'active' : '' ?>">
+                        <img src="assets/img/<?= $data['gambar'] ?>" class="d-block w-100 carousel-img" alt="...">
+                        <div class="carousel-caption d-flex flex-column justify-content-center align-items-center">
+                            <h5 class="display-4"><?= $data['judul'] ?></h5>
+                            <p class="lead"><?= $data['deskripsi'] ?></p>
+                        </div>
+                    </div>
+                <?php
+
+                    $no++;
+                } ?>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
         <!-- Left side columns -->
         <div class="col-12">
             <div class="row">

@@ -40,10 +40,17 @@
                                 require '../../api/config/connection.php';
                                 $data_modal = [];
                                 $no = 1;
-                                $query = mysqli_query(
-                                    $connection,
-                                    "SELECT id_user, nama, email, username, nip, pangkat, jabatan, bidang, alamat, is_verify, roles FROM tb_user ORDER BY nama ASC"
-                                );
+                                if($_COOKIE['roles'] === 'admin'){
+                                    $query = mysqli_query(
+                                        $connection,
+                                        "SELECT id_user, nama, email, username, nip, pangkat, jabatan, bidang, alamat, is_verify, roles FROM tb_user ORDER BY nama ASC"
+                                    );
+                                }else{
+                                    $query = mysqli_query(
+                                        $connection,
+                                        "SELECT id_user, nama, email, username, nip, pangkat, jabatan, bidang, alamat, is_verify, roles FROM tb_user WHERE id_user = '$id_user' ORDER BY nama ASC"
+                                    );
+                                }
                                 while ($data = mysqli_fetch_assoc($query)) {
                                     $data_modal[] = array(
                                         'id_user' => $data['id_user'],

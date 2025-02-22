@@ -855,3 +855,21 @@ function cetakRekap() {
     let url = '../api/controller/cetak/rekap.php?1=' + startDate + '&2=' + endDate;
     window.open(url, '_blank');
 }
+
+function hapusSlider(params) {
+    let url = api('controller/hapus-slider');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            id_slider: params
+        },
+        dataType: "text",
+        success: function (response) {
+            console.log(response);
+            setTimeout(() => {
+                nav('beranda');
+            }, 200);
+        }
+    });
+}
