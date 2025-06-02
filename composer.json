@@ -3,7 +3,9 @@
     "description": "diskominfo sppd",
     "type": "library",
     "require": {
-        "ramsey/uuid": "^4.7"
+        "ramsey/uuid": "^4.7",
+        "picqer/php-barcode-generator": "^3.2",
+        "endroid/qr-code": "^6.0"
     },
     "license": "MIT",
     "minimum-stability": "stable"
